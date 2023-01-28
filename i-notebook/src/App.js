@@ -8,18 +8,22 @@ import Navbar from './components/Navbar'
 import Home from './components/Home'
 import About from './components/About'
 import Notestate from './context/Notestate';
+import Login from './components/login/Login';
 function App() {
   return (
     <>
-    <Notestate>
-    <Router>
-    <Navbar/>
-    <Routes>
-    <Route path='/' element={<Home/>}/>  
-    <Route path='/about' element={<About/>}/>  
-    </Routes>
-    </Router>
-    </Notestate>
+      <Notestate>
+        <Router>
+        <Navbar />
+          <div className="container">
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/login' element={<Login />} />
+          </Routes>
+          </div>
+        </Router>
+      </Notestate>
     </>
   );
 }
