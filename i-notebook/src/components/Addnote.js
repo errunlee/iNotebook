@@ -1,4 +1,5 @@
 import React , {useContext} from 'react'
+import { useEffect } from 'react';
 import { useState } from 'react';
 import Notecontext from '../context/Notecontext'
 function Addnote() {
@@ -8,6 +9,7 @@ function Addnote() {
     const handleAdd=(e)=>{
         e.preventDefault();
         addNote(note.title,note.description,note.tag);
+        setNote({'title':'','description':'','tag':''})
     }
     const onChange=(e)=>{
         setNote({...note,[e.target.name]:e.target.value})
@@ -22,13 +24,17 @@ function Addnote() {
       <form>
   <div className="mb-3">
     <label className="form-label">Title</label>
-    <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name='title' onChange={onChange}/>    
+    <input id='title' type="text" className="form-control"  aria-describedby="emailHelp" name='title' value={note.title} onChange={onChange}/>    
   </div>
   <div className="mb-3">
     <label  className="form-label">Description</label>
-    <input type="text" className="form-control" id="exampleInputPassword1" name='description' onChange={onChange}/>
+    <input id='description' type="text" className="form-control"  name='description' value={note.description} onChange={onChange}/>
   </div>
-  <button type="submit" className="btn btn-primary" onClick={handleAdd}>Save Note</button>
+  <div className="mb-3">
+    <label  className="form-label">Tag</label>
+    <input type="text" className="form-control" id="exampleInputPassword1" name='tag'value={note.tag} onChange={onChange}/>
+  </div>
+  <button disabled={note.title.length<5 || note.description.length<5?true:false} type="submit" className="btn btn-primary" onClick={handleAdd}>Save Note</button>
 </form>
 </div>
     </>

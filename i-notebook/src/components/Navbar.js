@@ -22,7 +22,10 @@ export default function Navbar() {
           <Link className={`nav-link ${location==='/login'?'active':''}`} to="/login">Login</Link>
         </li>
       </ul>
-     
+      <form class="d-flex" role="search">
+      <Link className={`nav-link ${location==='/login'?'active':''} mx-2 btn btn-primary`} to="/login">Login</Link>
+      <Link className={`nav-link ${location==='/login'?'active':''} mx-2 btn btn-primary`} to="/signup">Signup</Link>
+      </form>
     </div>
   </div>
 </nav>

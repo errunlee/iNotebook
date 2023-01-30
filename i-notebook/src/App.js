@@ -9,6 +9,7 @@ import Home from './components/Home'
 import About from './components/About'
 import Notestate from './context/Notestate';
 import Login from './components/login/Login';
+import Signup from './components/login/Signup'
 function App() {
   return (
     <>
@@ -20,6 +21,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<About />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
           </Routes>
           </div>
         </Router>

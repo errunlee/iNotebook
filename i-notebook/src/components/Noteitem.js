@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import Notecontext from '../context/Notecontext'
-export default function Noteitem({ note }) {
+export default function Noteitem({ note,updateNote }) {
     const context = useContext(Notecontext)
     const { deleteNote } = context;
     return (
@@ -12,7 +12,7 @@ export default function Noteitem({ note }) {
                 </div>
                 <div>
                     <i title='Delete Note' onClick={()=>{deleteNote(note._id)}} className="fa-solid fa-trash m-2"></i>
-                    <i title='Edit Note' className="fa-solid fa-pen-to-square m-2"></i>
+                    <i title='Edit Note' className="fa-solid fa-pen-to-square m-2" onClick={()=>{updateNote(note)}}></i>
                 </div>
             </div>
         </div>

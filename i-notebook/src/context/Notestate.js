@@ -32,15 +32,7 @@ const response = await fetch(`http://localhost:5000/api/notes/addnote`, {
   body: JSON.stringify({title,description,tag}) 
 });
 
-      const note= {
-        "_id": "63d4dii3e9f4f1809594940b1d4b",
-        "user": "63c91988d15905f73840d86d",
-        "title": title,
-        "description": description,
-        "tag": tag,
-        "date": "2023-01-28T07:51:05.917Z",
-        "__v": 0
-      }
+      const note=await  response.json();
       setNotes(notes.concat(note));
     }
   //delete a note
@@ -54,9 +46,7 @@ const response = await fetch(`http://localhost:5000/api/notes/addnote`, {
     'Content-Type': 'application/json',
     'auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNjOTE5ODhkMTU5MDVmNzM4NDBkODZkIn0sImlhdCI6MTY3NDEyNDc2Mn0.ZC8jrZCgAfa2iQHBadKqGQCLyfzISwBoU81B2JBiJ5g'
   },
-});
-
-      
+});      
       //logic
       let newNotes=notes.filter((noteItem)=>{return noteItem._id!==id})
       setNotes(newNotes)
@@ -64,8 +54,8 @@ const response = await fetch(`http://localhost:5000/api/notes/addnote`, {
   //edit a note
   const editNote=async (id,title,description,tag)=>{
     //api call
-    const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    const response = await fetch(`${host}api/notes/updatenote/${id}`, {
+      method: 'PUT', // *GET, POST, PUT, DELETE, etc.
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
         'Content-Type': 'application/json',
@@ -74,17 +64,21 @@ const response = await fetch(`http://localhost:5000/api/notes/addnote`, {
       body: JSON.stringify({title,description,tag}) 
     });
     // eslint-disable-next-line
-    const json= response.json(); 
-  
+    const note= response.json(); 
+    setNotes(notes.concat(note))
     //lohic to edit
-    for(let i=0;i<notes.length;i++){
-      const elem=notes[i]
+    const newNote=JSON.parse(JSON.stringify(notes))
+    for(let i=0;i<newNote.length;i++){
+      const elem=newNote[i]
       if(elem._id===id){
-        elem.title=title
-        elem.description=description
-        elem.tag=tag;
+        newNote[i].title=title
+        newNote[i].description=description
+        newNote[i].tag=tag;
+      break;
       }
     }
+  setNotes(newNote)
+
   }
     return (
         <Notecontext.Provider value={{notes,setNotes,editNote,deleteNote,addNote,fetchNote}}>            
