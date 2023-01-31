@@ -12,7 +12,7 @@ const Notestate=({children})=>{
   credentials: 'same-origin', // include, *same-origin, omit
   headers: {
     'Content-Type': 'application/json',
-    'auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNjOTE5ODhkMTU5MDVmNzM4NDBkODZkIn0sImlhdCI6MTY3NDEyNDc2Mn0.ZC8jrZCgAfa2iQHBadKqGQCLyfzISwBoU81B2JBiJ5g'
+    'auth-token':localStorage.getItem('token')
   }
 })
 const data=await response.json();
@@ -27,7 +27,7 @@ const response = await fetch(`http://localhost:5000/api/notes/addnote`, {
   credentials: 'same-origin', // include, *same-origin, omit
   headers: {
     'Content-Type': 'application/json',
-    'auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNjOTE5ODhkMTU5MDVmNzM4NDBkODZkIn0sImlhdCI6MTY3NDEyNDc2Mn0.ZC8jrZCgAfa2iQHBadKqGQCLyfzISwBoU81B2JBiJ5g'
+    'auth-token':localStorage.getItem('token')
   },
   body: JSON.stringify({title,description,tag}) 
 });
@@ -44,7 +44,7 @@ const response = await fetch(`http://localhost:5000/api/notes/addnote`, {
   credentials: 'same-origin', // include, *same-origin, omit
   headers: {
     'Content-Type': 'application/json',
-    'auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNjOTE5ODhkMTU5MDVmNzM4NDBkODZkIn0sImlhdCI6MTY3NDEyNDc2Mn0.ZC8jrZCgAfa2iQHBadKqGQCLyfzISwBoU81B2JBiJ5g'
+    'auth-token':localStorage.getItem('token')
   },
 });      
       //logic
@@ -59,7 +59,7 @@ const response = await fetch(`http://localhost:5000/api/notes/addnote`, {
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
         'Content-Type': 'application/json',
-        'auth-token':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjNjOTE5ODhkMTU5MDVmNzM4NDBkODZkIn0sImlhdCI6MTY3NDEyNDc2Mn0.ZC8jrZCgAfa2iQHBadKqGQCLyfzISwBoU81B2JBiJ5g'
+        'auth-token':localStorage.getItem('token')
       },
       body: JSON.stringify({title,description,tag}) 
     });

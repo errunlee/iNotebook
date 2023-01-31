@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useRef } from 'react';
 import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Notecontext from '../context/Notecontext'
 import Addnote from './Addnote';
 import Noteitem from './Noteitem';
@@ -9,9 +10,15 @@ export default function Notes() {
   // eslint-disable-next-line
  const {notes,fetchNote,editNote}=allnote;
  const [note,setNote]=useState({'id':'','etitle':'','edescription':'','etag':''})
+ let navigate=useNavigate();
 
  useEffect(()=>{
-  fetchNote();
+  if(localStorage.getItem('token')){
+    fetchNote();
+  }
+  else{
+    navigate('/login')
+  }
  },[])
  const ref=useRef(null)
  const closeref=useRef(null)
@@ -23,7 +30,6 @@ export default function Notes() {
   e.preventDefault();
   closeref.current.click();
   editNote(note.id,note.etitle,note.edescription,note.etag);
-  setNote({'id':'','etitle':'','edescription':'','etag':''})
 }
 
 const onChange=(e)=>{

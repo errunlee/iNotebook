@@ -1,6 +1,12 @@
 import React from 'react'
-import {Link ,useLocation} from "react-router-dom";
+import {Link ,useLocation, useNavigate} from "react-router-dom";
 export default function Navbar() {
+  const navigate=useNavigate();
+
+  const logout=()=>{
+    localStorage.removeItem('token');
+    navigate('/Login')
+  }
   let location=useLocation();
   return (
     <div>
@@ -18,13 +24,11 @@ export default function Navbar() {
         <li className="nav-item">
           <Link className={`nav-link ${location==='/about'?'active':''}`} to="/about">About</Link>
         </li>
-        <li className="nav-item">
-          <Link className={`nav-link ${location==='/login'?'active':''}`} to="/login">Login</Link>
-        </li>
       </ul>
-      <form class="d-flex" role="search">
-      <Link className={`nav-link ${location==='/login'?'active':''} mx-2 btn btn-primary`} to="/login">Login</Link>
-      <Link className={`nav-link ${location==='/login'?'active':''} mx-2 btn btn-primary`} to="/signup">Signup</Link>
+      <form className="d-flex" role="search">
+      {!localStorage.getItem('token') && <Link className={`nav-link ${location==='/login'?'active':''} mx-2 btn btn-primary`} to="/login">Login</Link>}
+      {!localStorage.getItem('token') && <Link className={`nav-link ${location==='/login'?'active':''} mx-2 btn btn-primary`} to="/signup">Signup</Link>}
+      {localStorage.getItem('token') && <button onClick={logout} className={`nav-link mx-2 btn btn-primary`}>Logout</button>}
       </form>
     </div>
   </div>
