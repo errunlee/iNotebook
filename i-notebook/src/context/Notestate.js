@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Notecontext from "./Notecontext";
 const Notestate=({children})=>{
-  const host='http://localhost:5000/'
+  const host='https://backed-production.up.railway.app/'
     const noteInitial=[]
       const [notes,setNotes]=useState(noteInitial)
 
@@ -22,7 +22,7 @@ setNotes(data)
     const addNote=async (title,description,tag)=>{
 //api call
 // eslint-disable-next-line
-const response = await fetch(`http://localhost:5000/api/notes/addnote`, {
+const response = await fetch(`https://backed-production.up.railway.app/api/notes/addnote`, {
   method: 'POST', // *GET, POST, PUT, DELETE, etc.
   credentials: 'same-origin', // include, *same-origin, omit
   headers: {

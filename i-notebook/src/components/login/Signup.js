@@ -19,7 +19,7 @@ export default function Signup() {
     document.querySelector('.err-msg-1').classList.remove('vibrate')
 
     const {userName,email,password}=credentials
-    const response = await fetch(`http://localhost:5000/api/auth/createuser`, {
+    const response = await fetch(`https://backed-production.up.railway.app/api/auth/createuser`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
