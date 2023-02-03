@@ -13,7 +13,7 @@ export default function Login() {
     setCredentials({ ...credentials, [e.target.name]: e.target.value })
   }
   const getUserDetails=async ()=>{
-    const response = await fetch(`http://localhost:5000/api/auth/getuser`, {
+    const response = await fetch(`https://backed-production.up.railway.app/api/auth/getuser`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
@@ -27,7 +27,7 @@ export default function Login() {
   }
   const handleSubmit = async () => {
     setLoading(true)
-    const response = await fetch(`http://localhost:5000/api/auth/login`, {
+    const response = await fetch(`https://backed-production.up.railway.app/api/auth/login`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
