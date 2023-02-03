@@ -1,13 +1,23 @@
-import React from 'react'
+import React, {useState ,useEffect} from 'react'
 import {Link ,useLocation, useNavigate} from "react-router-dom";
 export default function Navbar() {
   const navigate=useNavigate();
-
   const logout=()=>{
-    localStorage.removeItem('token');
+    localStorage.clear();
     navigate('/Login')
   }
   let location=useLocation();
+  const [profile,setProfile]=useState('')
+    useEffect(()=>{
+      let c=0;
+      let int=setInterval(()=>{
+        setProfile(localStorage.getItem('name'));
+        c++;
+        if(c===0){
+          clearInterval(int)
+        }
+      },100)
+    })
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -28,7 +38,16 @@ export default function Navbar() {
       <form className="d-flex" role="search">
       {!localStorage.getItem('token') && <Link className={`nav-link ${location==='/login'?'active':''} mx-2 btn btn-primary`} to="/login">Login</Link>}
       {!localStorage.getItem('token') && <Link className={`nav-link ${location==='/login'?'active':''} mx-2 btn btn-primary`} to="/signup">Signup</Link>}
-      {localStorage.getItem('token') && <button onClick={logout} className={`nav-link mx-2 btn btn-primary`}>Logout</button>}
+      {localStorage.getItem('token') && <p className={`nav-link mx-2 m-0 text-light`}>Hello <span className='badge badge-primary'> {profile}</span></p>}
+      {/* {localStorage.getItem('token') && } */}
+      <div class="btn-group">
+  <button type="button" class="nav-link btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  {/* <i class="fa-sharp fa-solid fa-caret-down"></i> */}
+  </button>
+  <div class="dropdown-menu " style={{"left":"-45px","min-width":"0","padding":"0"}}>
+  <button onClick={logout} className={`nav-link btn btn-primary`}>Logout</button>
+  </div>
+</div>
       </form>
     </div>
   </div>

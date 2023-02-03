@@ -103,12 +103,13 @@ router.post('/login', [
 router.post('/getuser', fetcuser,  async (req, res) => {
 
   try {
-    userId = req.user.id;
+    let userId = req.user.id;
     const user = await User.findById(userId).select("-password")
-    res.send(user)
+    res.send({user})
   } catch (error) {
     console.error(error.message);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send("Internal Server Error1");
+    console.log('hari')
   }
 })
 module.exports = router

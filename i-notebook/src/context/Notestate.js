@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Notecontext from "./Notecontext";
 const Notestate=({children})=>{
-  const host='https://backed-production.up.railway.app/'
+  const host='http://localhost:5000/'
     const noteInitial=[]
       const [notes,setNotes]=useState(noteInitial)
 
@@ -22,7 +22,7 @@ setNotes(data)
     const addNote=async (title,description,tag)=>{
 //api call
 // eslint-disable-next-line
-const response = await fetch(`https://backed-production.up.railway.app/api/notes/addnote`, {
+const response = await fetch(`http://localhost:5000/api/notes/addnote`, {
   method: 'POST', // *GET, POST, PUT, DELETE, etc.
   credentials: 'same-origin', // include, *same-origin, omit
   headers: {
@@ -80,8 +80,22 @@ const response = await fetch(`https://backed-production.up.railway.app/api/notes
   setNotes(newNote)
 
   }
+  //get user details
+  const getUserDetails=async (email,password)=>{
+    const response = await fetch(`http://localhost:5000/api/auth/getuser`, {
+      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-token':localStorage.getItem('token')
+      },
+      body: JSON.stringify({ email,password })
+    })
+    const data=await response.json();
+    localStorage.setItem('name',data.user.name)
+  }
     return (
-        <Notecontext.Provider value={{notes,setNotes,editNote,deleteNote,addNote,fetchNote}}>            
+        <Notecontext.Provider value={{notes,setNotes,editNote,deleteNote,addNote,fetchNote,getUserDetails}}>            
             {children}
         </Notecontext.Provider>
     )
