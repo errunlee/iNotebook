@@ -39,15 +39,15 @@ export default function Navbar() {
       {!localStorage.getItem('token') && <Link className={`nav-link ${location==='/login'?'active':''} mx-2 btn btn-primary`} to="/login">Login</Link>}
       {!localStorage.getItem('token') && <Link className={`nav-link ${location==='/login'?'active':''} mx-2 btn btn-primary`} to="/signup">Signup</Link>}
       {localStorage.getItem('token') && <p className={`nav-link mx-2 m-0 text-light`}>Hello <span className='badge badge-primary'> {profile}</span></p>}
-      {/* {localStorage.getItem('token') && } */}
-      <div class="btn-group">
-  <button type="button" class="nav-link btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-  {/* <i class="fa-sharp fa-solid fa-caret-down"></i> */}
+      {localStorage.getItem('token') &&  <div> <div className="btn-group">
+  <button type="button" className="nav-link btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   </button>
-  <div class="dropdown-menu " style={{"left":"-45px","min-width":"0","padding":"0"}}>
+  <div className="dropdown-menu " style={{"left":"-45px","minWidth":"0","padding":"0"}}>
   <button onClick={logout} className={`nav-link btn btn-primary`}>Logout</button>
   </div>
 </div>
+</div> }
+    
       </form>
     </div>
   </div>
